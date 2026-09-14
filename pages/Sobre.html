@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content=""width=device-width, initial-scale="1.0">
+    <title>Sobre - Estação de Monitoramento IoT</title>
+    <link rel="stylesheet" href="../assets/styles/SobreStyle.css">
+</head>
+<body>
+
+    <header class="topo">
+        <div class="container">
+            <h1>Estação de Monitoramento IoT</h1>
+            <p class="grupo">Grupo 4</p>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <div class="container">
+            <a href="Sobre.html" class="ativo">Sobre</a>
+            <a href="DashB.html" >Dashboard</a>
+            <a href="Index.html"> Home</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <section class="secao">
+            <div class="container">
+                <article>
+
+                    <h2>O que foi feito</h2>
+
+                    <p>
+                        A ideia do projeto é: criar uma estação que fica monitorando 
+                        o ambiente o tempo todo. Usamos um ESP32 para ler temperatura, 
+                        umidade e qualidade do ar. Esses dados saem do mundo físico e vão 
+                        direto para uma página web, em tempo real.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+        <section class="secao fundo-claro">
+            <div class="container">
+                <article>
+                    <h2>Hardware usado</h2>
+
+                    <p> O projeto foi montado em cima de um ESP32, que é o cérebro do sistema. Dois sensores principais foram conectados:</p>
+
+                    <ul>
+                        <li><strong>DHT11</strong> - mede a temperatura e umidade</li>
+                        <li><strong>MQ-135</strong> - mede a qualidade do ar (gases)</li>
+                    </ul>
+                    <p>
+                        Três LEDs de alerta foram colocados, Cada um acende conforme algum valor passa do limite definido, tais como:
+                    </p>
+                    <ul>
+                        <li>Temp maior que 28C </li>
+                        <li>Umidade maior que 56% </li>
+                        <li>Gás acima de 400</li>
+                    </ul>
+
+                    <p>Dessa forma nos é alertado quando algo incomum acontecer</p>
+                    
+                    <div class="imagem-box">
+                        <img src="imagens/hardware.jpg" alt="Montagem do hardware com esp32 e sensores">
+                        <p class="legenda">Nossa montagem do hardware</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="secao">
+            <div class="container">
+                <article>
+                    <h2>Como os dados chegam na web</h2>
+                    <p> 
+                        O ESP32 se conecta no Wi-Fi e publica as leituras a cada 3 segundos 
+                        no broker MQTT (Mosquitto). Usamos três tópicos: </p>
+                    
+                    <ul> 
+                        <li> aulas/professortupi/temperatura</li>
+                        <li>aulas/professortupi/umidade</li>
+                        <li>aulas/professortupi/qualidade_ar</li>
+                    </ul>
+
+                    <p>Do outro lado, a página web se conecta no mesmo broker pela porta 
+                        de WebSockets (9001) usando a biblioteca Paho MQTT. Quando chega 
+                        uma mensagem nova, os cartões da dashboard atualizam na hora.</p>
+                    <p>É uma simples ponte entre o físico e o digital que funciona em tempo real</p>   
+                        
+                    <div class="imagem-box">
+                        <img src="imagens/arquitetura.jpg" alt="Diagrama da arquitetura do sistema">
+                        <p class="legenda"> Como os dados fluem do sensort até a tela</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="secao fundo-claro">
+            <div class="container">
+                <article>
+                    <h2>Parte da web</h2>
+                    <p>A interface tem duas páginas: esta de “Sobre” e a Dashboard Ao Vivo. 
+                        No Dashboard você vê os três valores atualizando em tempo real, 
+                        com indicador de conexão (conectado ou desconectado) e um banner 
+                        na parte de baixo com o nome do grupo.</p>
+                    <p>
+                        Também guardamos no localStorage a senha que o professor passou 
+                        para o grupo.
+                    </p>  
+                    
+                    <div class="imagem-box">
+                        <img src="imagens/dashboard.jpg" alt="Tela do Dashboard em funcionamento">
+                        <p class="legenda">Dashboard mostrando os dados ao vivo</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="secao">
+            <div class="container">
+                <article>
+                    <h2>Resumo</h2>
+                    <p>
+                        A gente juntou sensores, ESP32, MQTT e uma página web simples 
+                        para criar um monitoramento ambiental de ponta a ponta. 
+                        Funciona, é rápido de entender e mostra bem o que a Internet 
+                        das Coisas consegue fazer no dia a dia.
+                    </p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="container">
+            <p>Integrantes: Nome 1, Nome 2, Nome 3, Nome 4</p>
+            <p>Projeto IoT — SESI SENAI Vinhedo</p>
+        </div>
+    </footer>
+</body>
+</html>
