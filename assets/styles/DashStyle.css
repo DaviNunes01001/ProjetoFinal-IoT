@@ -36,6 +36,7 @@ nav {
   width: 320px;
   gap: 20px; 
   margin-bottom: 20px ;
+  color: #ffff;
 }
 
 li {
@@ -46,6 +47,11 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 li:hover {
