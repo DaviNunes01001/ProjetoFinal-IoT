@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard IoT - ESP32 + Mosquitto</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
+        type="text/javascript"></script>
+    <link rel="stylesheet" href="../assets/styles/DashStyle.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="FontHeader">Projeto Final IoT | Grupo - 4</h1>
+        <nav>
+            <ul>
+                <li><a href="../Index.html">Home</a></li>
+                <li><a href="./Sobre.html">Sobre</a></li>
+                <li><a href="./Dashoard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="Container">
+    <h1>Monitoramento IoT em Tempo Real</h1>
+    <div id="status" class="status disconnected">Status: Desconectado</div>
+
+    <div class="cards-container">
+        <div class="card">
+            <h3>Temperatura</h3>
+            <div class="value"><span id="temp">37</span> <span class="unit">°C</span></div>
+            <span id="alerta-Temperatura"></span>
+        </div>
+
+        <div class="card">
+            <h3>Umidade</h3>
+            <div class="value"><span id="hum">--</span> <span class="unit">%</span></div>
+        </div>
+
+        <div class="card">
+            <h3>Qualidade do Ar</h3>
+            <div class="value"><span id="air">1200</span> <span class="unit">ppm CO₂</span></div>
+            <span id="alerta-Ar"></span>
+        </div>
+    </div>
+</div>
+    <footer class="footer">
+    <p>© 2026 IoT Monitor</p>
+    <p>Projeto Estação de Monitoramento IoT</p>
+</footer>
+
+</body>
+<script src="../Script/AlertaTemperatura.js"></script>
+<script src="../Script/AlertaQualidadeAr.js"></script>
+<script>
+    atualizarTemperatura(document.getElementById("temp").textContent);
+    atualizarAr(document.getElementById("air").textContent);
+</script>
+
+</html>

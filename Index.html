@@ -1,64 +1,98 @@
-// --- CONFIGURAÇÕES DE CONEXÃO ---
-    // Substitua pelo IP do notebook onde o Mosquitto está rodando
-    const MQTT_HOST = "10.0.0.236"; 
-    const MQTT_PORT = 9001; // Porta WebSocket configurada no mosquitto.conf
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    // Tópicos exatos publicados pelo ESP32
-    const TOPIC_TEMP = "lucas/temperatura";
-    const TOPIC_HUM  = "lucas/umidade";
-    const TOPIC_AIR  = "lucas/gas";
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard IoT</title>
+  <link rel="stylesheet" href="assets/styles/Index.css">
+</head>
 
-    // Criação do ID de Cliente único para o navegador
-    const clientID = "WebDash_" + Math.random().toString(16).substr(2, 8);
+<body>
+  <header>
+    <h1 class="FontHeader">Projeto Final IoT | Grupo - 4</h1>
+    <nav>
+      <ul>
+        <li><a href="Index.html">Home</a></li>
+        <li><a href="pages/Sobre.html">Sobre</a></li>
+        <li><a href="pages/Dashoard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="inicio">
+      <h1>Estação de Monitoramento IoT</h1>
+      <p>
+        Projeto de Internet das Coisas desenvolvido para monitorar: temperatura, umidade e qualidade do ar em tempo
+        real.
+      </p>
+    </div>
+    <div class="elementos">
+    <h2>Componentes utilizados:</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>ESP32</h3>
+        <p>Microcontrolador responsável pelo sistema.</p>
+      </div>
 
-    // Inicializa o cliente MQTT Paho
-    const client = new Paho.MQTT.Client(MQTT_HOST, Number(MQTT_PORT), clientID);
+      <div class="card">
+        <h3>DHT11</h3>
+        <p>Mede temperatura e umidade.</p>
+      </div>
 
-    // Callbacks do cliente
-    client.onConnectionLost = onConnectionLost;
-    client.onMessageArrived = onMessageArrived;
+      <div class="card">
+        <h3>MQ-135</h3>
+        <p>Monitora a qualidade do ar.</p>
+      </div>
+    </div>
 
-    // Conecta ao broker
-    client.connect({
-      onSuccess: onConnect,
-      onFailure: onFailure
-    });
+    </div>
+    </div>
+    <div class="equipe">
+      <h2>Integrantes do Grupo</h2>
 
-    function onConnect() {
-      const statusDiv = document.getElementById("status");
-      statusDiv.innerText = "Status: Conectado ao Mosquitto";
-      statusDiv.className = "status connected";
+      <div class="cards2">
 
-      // Assina os tópicos após conectar com sucesso
-      client.subscribe(TOPIC_TEMP);
-      client.subscribe(TOPIC_HUM);
-      client.subscribe(TOPIC_AIR);
-    }
+        <div class="card2">
+          <img src="assets/img/aaaaaaaa.png" alt="Matheus Lopes de Souza">
+          <h3>Matheus Lopes de Souza</h3>
+          <p>O PAI</p>
+        </div>
 
-    function onFailure(responseObject) {
-      const statusDiv = document.getElementById("status");
-      statusDiv.innerText = "Status: Falha na conexão (" + responseObject.errorMessage + ")";
-      statusDiv.className = "status disconnected";
-    }
+        <div class="card2">
+          <img src="assets/img/aaaaadafaaf.webp" alt="Davi Nunes Bulões">
+          <h3>Davi Nunes Bulões</h3>
+          <p>Patrão fdp</p>
+        </div>
 
-    function onConnectionLost(responseObject) {
-      if (responseObject.errorCode !== 0) {
-        const statusDiv = document.getElementById("status");
-        statusDiv.innerText = "Status: Conexão Perdida";
-        statusDiv.className = "status disconnected";
-      }
-    }
+        <div class="card2">
+          <img src="assets/img/image.webp" alt="Kaio Grapea Pires">
+          <h3>Kaio Grapea Pires</h3>
+          <p>Guloso</p>
+        </div>
 
-    // Processa as mensagens recebidas nos tópicos assinados
-    function onMessageArrived(message) {
-      const topic = message.destinationName;
-      const payload = message.payloadString;
+        <div class="card2">
+          <img src="assets/img/8b312a11-9421-4c7d-a010-ee367fe8d521.webp" alt="Lucas Emanuel Mergulhão">
+          <h3>Lucas Emanuel Mergulhão</h3>
+          <p>Preto guloso</p>
+        </div>
 
-      if (topic === TOPIC_TEMP) {
-        document.getElementById("temp").innerText = payload;
-      } else if (topic === TOPIC_HUM) {
-        document.getElementById("hum").innerText = payload;
-      } else if (topic === TOPIC_AIR) {
-        document.getElementById("air").innerText = payload;
-      }
-    }
+        <div class="card2">
+          <img src="assets/img/content111.webp" alt="Miguel Barbosa Franco">
+          <h3>Miguel Barbosa Franco</h3>
+          <p>Ba'al</p>
+        </div>
+
+        <div class="card2">
+          <img src="assets/img/adsafwffa.png" alt="Giovanni Perêgo Favarine">
+          <h3>Giovanni Perêgo Favarine</h3>
+          <p>Babadook</p>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</body>
+
+</html>
