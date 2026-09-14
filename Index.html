@@ -1,78 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard IoT - ESP32 + Mosquitto</title>
-  <!-- Biblioteca Paho MQTT via CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
-  
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f7f6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-    h1 { color: #333; }
-    .status {
-      font-weight: bold;
-      margin-bottom: 20px;
-      padding: 8px 16px;
-      border-radius: 4px;
-    }
-    .connected { background-color: #d4edda; color: #155724; }
-    .disconnected { background-color: #f8d7da; color: #721c24; }
-    
-    .cards-container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 200px;
-      text-align: center;
-    }
-    .card h3 { margin-top: 0; color: #666; }
-    .card .value {
-      font-size: 2.2em;
-      font-weight: bold;
-      color: #007bff;
-    }
-    .card .unit { font-size: 0.5em; color: #888; }
-  </style>
-</head>
-<body>
-
-  <h1>📊 Monitoramento IoT em Tempo Real</h1>
-  <div id="status" class="status disconnected">Status: Desconectado</div>
-
-  <div class="cards-container">
-    <div class="card">
-      <h3>Temperatura</h3>
-      <div class="value"><span id="temp">--</span> <span class="unit">°C</span></div>
-    </div>
-
-    <div class="card">
-      <h3>Umidade</h3>
-      <div class="value"><span id="hum">--</span> <span class="unit">%</span></div>
-    </div>
-
-    <div class="card">
-      <h3>Qualidade do Ar</h3>
-      <div class="value"><span id="air">--</span></div>
-    </div>
-  </div>
-
-  <script>
-    // --- CONFIGURAÇÕES DE CONEXÃO ---
+// --- CONFIGURAÇÕES DE CONEXÃO ---
     // Substitua pelo IP do notebook onde o Mosquitto está rodando
     const MQTT_HOST = "10.0.0.236"; 
     const MQTT_PORT = 9001; // Porta WebSocket configurada no mosquitto.conf
@@ -136,6 +62,3 @@
         document.getElementById("air").innerText = payload;
       }
     }
-  </script>
-</body>
-</html>
