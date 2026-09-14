@@ -1,7 +1,7 @@
 // --- CONFIGURAÇÕES DE CONEXÃO ---
-// Substitua pelo IP do notebook onde o Mosquitto está rodando
-const MQTT_HOST = "10.0.0.232";
-const MQTT_PORT = 9001; // Porta WebSocket configurada no mosquitto.conf
+// O ESP32 usa MQTT TCP na porta 1883; o navegador usa WebSocket na 9001.
+const MQTT_HOST = "10.0.0.252";
+const MQTT_PORT = 9001;
 
 // Tópicos exatos publicados pelo ESP32
 const TOPIC_TEMP = "matheus/temperatura";
@@ -38,7 +38,13 @@ function onConnect() {
 function onFailure(responseObject) {
   const statusDiv = document.getElementById("status");
   statusDiv.innerText =
-    "Status: Falha na conexão (" + responseObject.errorMessage + ")";
+    "Status: Falha na conexão com " +
+    MQTT_HOST +
+    ":" +
+    MQTT_PORT +
+    " (" +
+    (responseObject.errorMessage || "verifique o WebSocket do Mosquitto") +
+    ")";
   statusDiv.className = "status disconnected";
 }
 
