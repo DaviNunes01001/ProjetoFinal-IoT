@@ -1,141 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard IoT - ESP32 + Mosquitto</title>
-  <!-- Biblioteca Paho MQTT via CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
-  
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f7f6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-    h1 { color: #333; }
-    .status {
-      font-weight: bold;
-      margin-bottom: 20px;
-      padding: 8px 16px;
-      border-radius: 4px;
-    }
-    .connected { background-color: #d4edda; color: #155724; }
-    .disconnected { background-color: #f8d7da; color: #721c24; }
-    
-    .cards-container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 200px;
-      text-align: center;
-    }
-    .card h3 { margin-top: 0; color: #666; }
-    .card .value {
-      font-size: 2.2em;
-      font-weight: bold;
-      color: #007bff;
-    }
-    .card .unit { font-size: 0.5em; color: #888; }
-  </style>
+  <title>Dashboard IoT</title>
+  <link rel="stylesheet" href="assets/styles/Index.css">
 </head>
+
 <body>
-
-  <h1>📊 Monitoramento IoT em Tempo Real</h1>
-  <div id="status" class="status disconnected">Status: Desconectado</div>
-
-  <div class="cards-container">
-    <div class="card">
-      <h3>Temperatura</h3>
-      <div class="value"><span id="temp">--</span> <span class="unit">°C</span></div>
+  <main>
+    <div class="inicio">
+      <h1>Estação de Monitoramento IoT</h1>
+      <p>
+        Projeto de Internet das Coisas desenvolvido para monitorar: temperatura, umidade e qualidade do ar em tempo
+        real.
+      </p>
     </div>
+    <div class="cards">
+      <div class="card">
+        <h3>ESP32</h3>
+        <p>Microcontrolador responsável pelo sistema.</p>
+      </div>
 
-    <div class="card">
-      <h3>Umidade</h3>
-      <div class="value"><span id="hum">--</span> <span class="unit">%</span></div>
+      <div class="card">
+        <h3>DHT11</h3>
+        <p>Mede temperatura e umidade.</p>
+      </div>
+
+      <div class="card">
+        <h3>MQ-135</h3>
+        <p>Monitora a qualidade do ar.</p>
+      </div>
+
     </div>
-
-    <div class="card">
-      <h3>Qualidade do Ar</h3>
-      <div class="value"><span id="air">--</span></div>
     </div>
-  </div>
+    <div class="equipe">
+      <h2>Integrantes do Grupo</h2>
 
-  <script>
-    // --- CONFIGURAÇÕES DE CONEXÃO ---
-    // Substitua pelo IP do notebook onde o Mosquitto está rodando
-    const MQTT_HOST = "10.0.0.236"; 
-    const MQTT_PORT = 9001; // Porta WebSocket configurada no mosquitto.conf
+      <div class="cards2">
 
-    // Tópicos exatos publicados pelo ESP32
-    const TOPIC_TEMP = "lucas/temperatura";
-    const TOPIC_HUM  = "lucas/umidade";
-    const TOPIC_AIR  = "lucas/gas";
+        <div class="card2">
+          <img src="assets/img/aaaaaaaa.png" alt="Matheus Lopes de Souza">
+          <h3>Matheus Lopes de Souza</h3>
+          <p>O PAI</p>
+        </div>
 
-    // Criação do ID de Cliente único para o navegador
-    const clientID = "WebDash_" + Math.random().toString(16).substr(2, 8);
+        <div class="card2">
+          <img src="assets/img/aaaaadafaaf.webp" alt="Davi Nunes Bulões">
+          <h3>Davi Nunes Bulões</h3>
+          <p>Patrão fdp</p>
+        </div>
 
-    // Inicializa o cliente MQTT Paho
-    const client = new Paho.MQTT.Client(MQTT_HOST, Number(MQTT_PORT), clientID);
+        <div class="card2">
+          <img src="assets/img/image.webp" alt="Kaio Grapea Pires">
+          <h3>Kaio Grapea Pires</h3>
+          <p>Guloso</p>
+        </div>
 
-    // Callbacks do cliente
-    client.onConnectionLost = onConnectionLost;
-    client.onMessageArrived = onMessageArrived;
+        <div class="card2">
+          <img src="assets/img/8b312a11-9421-4c7d-a010-ee367fe8d521.webp" alt="Lucas Emanuel Mergulhão">
+          <h3>Lucas Emanuel Mergulhão</h3>
+          <p>Preto guloso</p>
+        </div>
 
-    // Conecta ao broker
-    client.connect({
-      onSuccess: onConnect,
-      onFailure: onFailure
-    });
+        <div class="card2">
+          <img src="assets/img/content111.webp" alt="Miguel Barbosa Franco">
+          <h3>Miguel Barbosa Franco</h3>
+          <p>Ba'al</p>
+        </div>
 
-    function onConnect() {
-      const statusDiv = document.getElementById("status");
-      statusDiv.innerText = "Status: Conectado ao Mosquitto";
-      statusDiv.className = "status connected";
+        <div class="card2">
+          <img src="assets/img/adsafwffa.png" alt="Giovanni Perêgo Favarine">
+          <h3>Giovanni Perêgo Favarine</h3>
+          <p>Babadook</p>
+        </div>
 
-      // Assina os tópicos após conectar com sucesso
-      client.subscribe(TOPIC_TEMP);
-      client.subscribe(TOPIC_HUM);
-      client.subscribe(TOPIC_AIR);
-    }
+      </div>
 
-    function onFailure(responseObject) {
-      const statusDiv = document.getElementById("status");
-      statusDiv.innerText = "Status: Falha na conexão (" + responseObject.errorMessage + ")";
-      statusDiv.className = "status disconnected";
-    }
-
-    function onConnectionLost(responseObject) {
-      if (responseObject.errorCode !== 0) {
-        const statusDiv = document.getElementById("status");
-        statusDiv.innerText = "Status: Conexão Perdida";
-        statusDiv.className = "status disconnected";
-      }
-    }
-
-    // Processa as mensagens recebidas nos tópicos assinados
-    function onMessageArrived(message) {
-      const topic = message.destinationName;
-      const payload = message.payloadString;
-
-      if (topic === TOPIC_TEMP) {
-        document.getElementById("temp").innerText = payload;
-      } else if (topic === TOPIC_HUM) {
-        document.getElementById("hum").innerText = payload;
-      } else if (topic === TOPIC_AIR) {
-        document.getElementById("air").innerText = payload;
-      }
-    }
-  </script>
+    </div>
+  </main>
 </body>
+
 </html>
