@@ -162,3 +162,59 @@ footer {
 .Container {
     height: 500px;
 }
+
+@media (max-width: 600px) {
+  header {
+    height: auto;
+    min-height: 145px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .FontHeader {
+    font-size: 1.35rem;
+  }
+
+  nav {
+    width: 100%;
+    max-width: 320px;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  nav li {
+    width: auto;
+    flex: 1;
+  }
+
+  .Container {
+    width: 100%;
+    height: auto;
+    padding: 24px 16px 0;
+  }
+
+  .Container > h1 {
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  .cards-container {
+    gap: 12px;
+  }
+
+  .card {
+    width: min(100%, 280px);
+    height: auto;
+    min-height: 160px;
+    padding: 18px;
+  }
+
+  footer {
+    height: auto;
+    min-height: 70px;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+}
