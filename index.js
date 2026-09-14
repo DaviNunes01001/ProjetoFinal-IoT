@@ -62,10 +62,10 @@ function onMessageArrived(message) {
   const payload = message.payloadString;
 
   if (topic === TOPIC_TEMP) {
-    document.getElementById("temp").innerText = payload;
+    atualizarTemperatura(payload);
   } else if (topic === TOPIC_HUM) {
-    document.getElementById("hum").innerText = payload;
+    document.getElementById("hum").textContent = payload;
   } else if (topic === TOPIC_AIR) {
-    document.getElementById("air").innerText = payload;
+    atualizarAr(payload);
   }
 }

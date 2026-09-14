@@ -212,11 +212,74 @@ header nav li:hover {
   background-color: #ffffff3d;
 }
 
-.footer {
-  display: flex;
-  min-height: 70px;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #02005f;
-  color: rgba(255, 255, 255, 0.741);
+footer {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+@media (max-width: 600px) {
+  header {
+    min-height: 145px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .FontHeader {
+    font-size: 1.35rem;
+  }
+
+  header nav {
+    width: 100%;
+    max-width: 320px;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  header nav li {
+    width: auto;
+    flex: 1;
+  }
+
+  main {
+    padding: 24px 16px;
+  }
+
+  .inicio {
+    padding: 32px 8px;
+  }
+
+  .inicio h1 {
+    font-size: 2rem;
+  }
+
+  .inicio p {
+    letter-spacing: 0.5px;
+  }
+
+  .cards,
+  .cards2 {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card,
+  .card2 {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .card2 img {
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 16px;
+    text-align: center;
+  }
 }
