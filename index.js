@@ -1,6 +1,6 @@
 // --- CONFIGURAÇÕES DE CONEXÃO ---
 // Substitua pelo IP do notebook onde o Mosquitto está rodando
-const MQTT_HOST = "10.0.0.232";
+const MQTT_HOST = "10.0.0.187";
 const MQTT_PORT = 9001; // Porta WebSocket configurada no mosquitto.conf
 
 // Tópicos exatos publicados pelo ESP32
@@ -56,10 +56,10 @@ function onMessageArrived(message) {
   const payload = message.payloadString;
 
   if (topic === TOPIC_TEMP) {
-    document.getElementById("temp").innerText = payload;
+    atualizarTemperatura(payload);
   } else if (topic === TOPIC_HUM) {
-    document.getElementById("hum").innerText = payload;
+    document.getElementById("hum").textContent = payload;
   } else if (topic === TOPIC_AIR) {
-    document.getElementById("air").innerText = payload;
+    atualizarAr(payload);
   }
 }

@@ -212,11 +212,8 @@ header nav li:hover {
   background-color: #ffffff3d;
 }
 
-.footer {
-  display: flex;
-  min-height: 70px;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #02005f;
-  color: rgba(255, 255, 255, 0.741);
+footer {
+ display: flex;
+ align-items: center;
+ justify-content: center;
 }
