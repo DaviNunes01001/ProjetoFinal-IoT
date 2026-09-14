@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard IoT - ESP32 + Mosquitto</title>
+    <!-- Biblioteca Paho MQTT via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
         type="text/javascript"></script>
     <link rel="stylesheet" href="../assets/styles/DashStyle.css">
@@ -14,11 +15,9 @@
     <header>
         <h1 class="FontHeader">Projeto Final IoT | Grupo - 4</h1>
         <nav>
-            <ul>
-                <li><a href="../Index.html">Home</a></li>
-                <li><a href="./Sobre.html">Sobre</a></li>
-                <li><a href="./Dashoard.html">Dashboard</a></li>
-            </ul>
+            <li><a href="../Index.html">Home</a></li>
+            <li><a href="./Sobre.html">Sobre</a></li>
+            <li><a href="./Dashoard.html">Dashboard</a></li>
         </nav>
     </header>
     <div class="Container">
@@ -28,7 +27,7 @@
     <div class="cards-container">
         <div class="card">
             <h3>Temperatura</h3>
-            <div class="value"><span id="temp">37</span> <span class="unit">°C</span></div>
+            <div class="value"><span id="temp">--</span> <span class="unit">°C</span></div>
             <span id="alerta-Temperatura"></span>
         </div>
 
@@ -39,7 +38,7 @@
 
         <div class="card">
             <h3>Qualidade do Ar</h3>
-            <div class="value"><span id="air">1200</span> <span class="unit">ppm CO₂</span></div>
+            <div class="value"><span id="air">--</span> <span class="unit">ppm CO₂</span></div>
             <span id="alerta-Ar"></span>
         </div>
     </div>
