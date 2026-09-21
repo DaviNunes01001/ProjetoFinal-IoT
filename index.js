@@ -8,6 +8,10 @@ const TOPIC_TEMP = "matheus/temperatura";
 const TOPIC_HUM = "matheus/umidade";
 const TOPIC_AIR = "matheus/gas";
 const SENSOR_STORAGE_KEY = "iot:ultimosValoresSensores";
+const NOMES_STORAGE_KEY = "iot:nomeIntegrantes";
+const nomesIntegrantes = ["lucas", "matheus", "miguel", "kaio", "davi", "gico"];
+
+localStorage.setItem(NOMES_STORAGE_KEY, JSON.stringify(nomesIntegrantes));
 
 function salvarUltimoValor(sensor, valor) {
   const valorNumerico = Number(valor);
