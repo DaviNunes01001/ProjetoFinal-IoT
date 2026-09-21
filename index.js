@@ -7,6 +7,51 @@ const MQTT_PORT = 9001;
 const TOPIC_TEMP = "matheus/temperatura";
 const TOPIC_HUM = "matheus/umidade";
 const TOPIC_AIR = "matheus/gas";
+const SENSOR_STORAGE_KEY = "iot:ultimosValoresSensores";
+const NOMES_STORAGE_KEY = "iot:nomeIntegrantes";
+const nomesIntegrantes = ["lucas", "matheus", "miguel", "kaio", "davi", "gico"];
+
+localStorage.setItem(NOMES_STORAGE_KEY, JSON.stringify(nomesIntegrantes));
+
+function salvarUltimoValor(sensor, valor) {
+  const valorNumerico = Number(valor);
+
+  if (!Number.isFinite(valorNumerico)) {
+    return;
+  }
+
+  try {
+    const valoresSalvos = JSON.parse(
+      localStorage.getItem(SENSOR_STORAGE_KEY) || "{}"
+    );
+    valoresSalvos[sensor] = valorNumerico;
+    localStorage.setItem(SENSOR_STORAGE_KEY, JSON.stringify(valoresSalvos));
+  } catch (error) {
+    console.warn("Não foi possível salvar os valores dos sensores.", error);
+  }
+}
+
+function restaurarUltimosValores() {
+  try {
+    const valoresSalvos = JSON.parse(
+      localStorage.getItem(SENSOR_STORAGE_KEY) || "{}"
+    );
+
+    if (Number.isFinite(Number(valoresSalvos.temperatura))) {
+      atualizarTemperatura(valoresSalvos.temperatura);
+    }
+
+    if (Number.isFinite(Number(valoresSalvos.umidade))) {
+      document.getElementById("hum").textContent = valoresSalvos.umidade;
+    }
+
+    if (Number.isFinite(Number(valoresSalvos.ar))) {
+      atualizarAr(valoresSalvos.ar);
+    }
+  } catch (error) {
+    console.warn("Não foi possível restaurar os valores dos sensores.", error);
+  }
+}
 
 // Criação do ID de Cliente único para o navegador
 const clientID = "WebDash_" + Math.random().toString(16).substr(2, 8);
@@ -64,8 +109,15 @@ function onMessageArrived(message) {
   if (topic === TOPIC_TEMP) {
     atualizarTemperatura(payload);
   } else if (topic === TOPIC_HUM) {
-    document.getElementById("hum").textContent = payload;
+    const umidadeNumerica = Number(payload);
+
+    if (Number.isFinite(umidadeNumerica)) {
+      document.getElementById("hum").textContent = umidadeNumerica;
+      salvarUltimoValor("umidade", umidadeNumerica);
+    }
   } else if (topic === TOPIC_AIR) {
     atualizarAr(payload);
   }
 }
+
+restaurarUltimosValores();

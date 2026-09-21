@@ -11,6 +11,8 @@ function atualizarAr(co2) {
 
     co2Texto.textContent = co2Numerico;
 
+    salvarUltimoValor("ar", co2Numerico);
+
     const arRuim = co2Numerico >= 1000;
     alerta.textContent = arRuim
         ? "⚠️ Qualidade de Ar Ruim"

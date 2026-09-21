@@ -11,6 +11,8 @@ function atualizarTemperatura(temperatura) {
 
     temperaturaTexto.textContent = temperaturaNumerica;
 
+    salvarUltimoValor("temperatura", temperaturaNumerica);
+
     const temperaturaAlta = temperaturaNumerica >= 30;
     alerta.textContent = temperaturaAlta
         ? "⚠️ Temperatura alta"
